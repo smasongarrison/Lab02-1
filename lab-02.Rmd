@@ -43,6 +43,7 @@ ggplot(
   geom_density(alpha = 0.3)
 
 ```
+
 We defined 'color' and 'fill' inside the aesthetic mapping because we want them to vary based on the data. Specifically, we want a different color and fill for each unique value in the continent variable. By placing them inside aes(), we tell ggplot2 to map the data variable to the visualize properties. 
 As for 'alpha level', we defined it as a characteristic of the plotting outside of aes() because we want it to remain constant for the entire plot. In other words, we are not mapping transparency to a specific variable, e.g., setting Africa more transparent than Aisa; we are setting the transparent level for all the density plots for all continents. 
 
@@ -69,6 +70,7 @@ ggplot(
 ) +
   geom_violin()
 ```
+
 Violin plots show the entire density distribution of the data. They reveal the shape of the data, its distribution (skewed or uniform). A box plot compresses this information into a simple rectangle, potentially hiding these nuances.
 However, box plots explicitly mark specific summary statistics and outliers. We can easily see the median, the interquartile range, and potential outliers. While we can infer the general range from a violin plot, it does not strictly identify outliers or exact quartile values.
 
@@ -77,12 +79,14 @@ However, box plots explicitly mark specific summary statistics and outliers. We 
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap)) + 
   geom_point()
 ```
+
 The scatterplot shows a positive relationship between mismanaged plastic waster and plastic waster per capita，where higher plastic waster per capita correlates with higher mismanaged waste, though the relationship is large likely to be driven by a cluster of countries with low values for both. 
 
 ```{r plastic-waste-mismanaged-continent}
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap, y = mismanaged_plastic_waste_per_cap, color = continent)) + 
   geom_point() 
 ```
+
 From the color-filtered plot, the distinctions between continents are clearer - the correlation between plastic waster per capit and mismanaged plastic waste seems to be less positive in North America and Europe than other continents. 
 
 ```{r plastic-waste-population-total}
@@ -92,6 +96,7 @@ ggplot(data = plastic_waste, aes(x = total_pop, y = plastic_waste_per_cap, color
 ```{r plastic-waste-population-coastal}
 ggplot(data = plastic_waste, aes(x = coastal_pop, y = plastic_waste_per_cap, color = continent)) + geom_point()
 ```
+
 In my opinion, neither shows a strongly linear association. In both plots, the data is heavily clustered in the bottom-left corner, indicating that some continents have both small populations and low plastic waste per capita. In this way, whether total or coastal, does not appear to be a good linear predictor of how much plastic waste a country generates. 
 
 
@@ -103,4 +108,5 @@ plastic_waste %>%
   geom_point(aes(color = continent)) + 
   geom_smooth()
 ```
+
 Noticeably, some data points show a coastal population proportion exceeding 1.0, which is mathematically impossible. Beyond this observed data validity, the trend line is relatively flat with high variability, indicating that there is no strong linear association between the percentage of the population living near the coast and the amount of plastic waste generated per capita. 
